@@ -224,3 +224,28 @@ void dfs(int u) {
         } 
     }
 ```
+
+## 动态规划
+
+* 距离动态规划
+
+```C++
+    for (int L = 2; L <= n; L ++) {
+        for (int i = 0; i < n;  i++) { // left index
+            int j = L + i - 1; // right index
+            if (j >= n) break;
+            if (s[i] != s[j]) dp[i][j] = false;
+            else if (j - i < 3) dp[i][j] = true;
+            else {
+                dp[i][j] = dp[i + 1][j - 1];
+            }
+            
+            if (dp[i][j] && L > res) {
+                L = res; // res length;
+                begin = i;
+            }
+        }
+    }
+
+    return str.substr(begin, res);
+```
